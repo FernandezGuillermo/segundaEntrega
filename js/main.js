@@ -1,6 +1,6 @@
 
 
-
+//Tomamos el formulario creado en htmal
 const idFormulario = document.getElementById("formulario");
 
 //Registramos un nuevo usuario
@@ -10,7 +10,7 @@ idFormulario.addEventListener("submit",(e)=>{
     const user = document.getElementById("user").value;
     const email = document.getElementById("email").value;
     const password = document.getElementById("password").value;
-    
+
     //Creamos el objeto usuario
     const usuario = new User(user,email,password);
     
@@ -18,27 +18,30 @@ idFormulario.addEventListener("submit",(e)=>{
     users.push(usuario);
 
     //Guardo los datos en el storage
-    localStorage.setItem("Usuarios",JSON.stringify(users));
+    localStorage.setItem("Usuario",JSON.stringify(users));
     
     //Limpiamos el formulario
     idFormulario.reset();
 
-    let textUsuario = document.createElement('p');
-    textUsuario.innerText = "Se ha registrado correctamente";
+    console.log("El usuario ya esta registrado");
 })
 
+const userFormulario = document.getElementById("user");
+
 function verificarUsuario(userName){
-    let user = users.find(user => user.userName === userName);
-    if(user === undefined){
-        let text = document.createElement('p');
-        text.innerText = "No estas registrado debes registrarte";
-        idFormulario.appendChild(text);
-    }else{
-        let text = document.createElement('p');
-        text.innerText = "Ingreso exitoso";
-        idFormulario.appendChild(text);
-    }
+    let user = localStorage.getItem("Usuario",JSON.stringify(users));
+    user = users.find(user => user.userName === userName);
+    /* let text = document.createElement('p'); */
+    user === undefined ? true : invalidarFormulario();
+    /* user === undefined ? true : false; */
+    /* user === undefined ? text.innerText = "Puedes registrarte" : text.innerText = "no puedes registrarte"; */
+    /* idFormulario.appendChild(text);  */
 }
 
-verificarUsuario("guille8");
+function invalidarFormulario(){ //funcion que me invalida el formulario cambiando su estilo con bootstrap
+    const userFormulario = document.getElementById("user");
+    userFormulario.className = "form-control is-invalid";
+    userFormulario.id = "floatingInputGroup2";
+}
 
+verificarUsuario("guille86");
