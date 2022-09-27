@@ -11,21 +11,16 @@ idFormulario.addEventListener("submit",(e)=>{
     const email = document.getElementById("email").value;
     const password = document.getElementById("password").value;
 
-    verificarUsuario(user);
 
-    //Creamos el objeto usuario
-    const usuario = new User(user,email,password);
-
-    //Agregamos el usuario al array
-    users.push(usuario);
-
-    //Guardo los datos en el storage
-    localStorage.setItem("Usuario",JSON.stringify(users));
+    if(verificarUsuario(user)){ //si el usuario ya esta registrado
+        invalidarFormulario(); //invalido el usuario y no se registra
+    }
+    else{
+        registrarUsuario(user,email,password); //si el usuario no esta registrado se registra
+    }
     
     //Limpiamos el formulario
-    idFormulario.reset();
-    
-    
+    idFormulario.reset();    
 })
 
 const userFormulario = document.getElementById("user");
@@ -33,7 +28,7 @@ const userFormulario = document.getElementById("user");
 function verificarUsuario(userName){
     let user = localStorage.getItem("Usuario",JSON.stringify(users));
     user = users.find(user => user.userName === userName);
-    if(user != undefined) invalidarFormulario();
+    if(user != undefined) return true;
 }
 
 function invalidarFormulario(){ //funcion que me invalida el formulario cambiando su estilo con bootstrap
@@ -42,6 +37,13 @@ function invalidarFormulario(){ //funcion que me invalida el formulario cambiand
     userFormulario.id = "floatingInputGroup2";
 }
 
+function registrarUsuario(user,email,password){
+    //Creamos el objeto usuario
+    const usuario = new User(user,email,password);
 
+    //Agregamos el usuario al array
+    users.push(usuario);
 
-verificarUsuario("guille86");
+    //Guardo los datos en el storage
+    localStorage.setItem("Usuario",JSON.stringify(users));
+}
