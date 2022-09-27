@@ -11,9 +11,11 @@ idFormulario.addEventListener("submit",(e)=>{
     const email = document.getElementById("email").value;
     const password = document.getElementById("password").value;
 
+    verificarUsuario(user);
+
     //Creamos el objeto usuario
     const usuario = new User(user,email,password);
-    
+
     //Agregamos el usuario al array
     users.push(usuario);
 
@@ -22,8 +24,8 @@ idFormulario.addEventListener("submit",(e)=>{
     
     //Limpiamos el formulario
     idFormulario.reset();
-
-    console.log("El usuario ya esta registrado");
+    
+    
 })
 
 const userFormulario = document.getElementById("user");
@@ -31,11 +33,7 @@ const userFormulario = document.getElementById("user");
 function verificarUsuario(userName){
     let user = localStorage.getItem("Usuario",JSON.stringify(users));
     user = users.find(user => user.userName === userName);
-    /* let text = document.createElement('p'); */
-    user === undefined ? true : invalidarFormulario();
-    /* user === undefined ? true : false; */
-    /* user === undefined ? text.innerText = "Puedes registrarte" : text.innerText = "no puedes registrarte"; */
-    /* idFormulario.appendChild(text);  */
+    if(user != undefined) invalidarFormulario();
 }
 
 function invalidarFormulario(){ //funcion que me invalida el formulario cambiando su estilo con bootstrap
@@ -43,5 +41,7 @@ function invalidarFormulario(){ //funcion que me invalida el formulario cambiand
     userFormulario.className = "form-control is-invalid";
     userFormulario.id = "floatingInputGroup2";
 }
+
+
 
 verificarUsuario("guille86");
