@@ -32,10 +32,13 @@ function verificarUsuario(userName){
     if(user === undefined){
         let text = document.createElement('p');
         text.innerText = "No estas registrado debes registrarte";
+        idFormulario.appendChild(text);
     }else{
+        let text = document.createElement('p');
         text.innerText = "Ingreso exitoso";
+        idFormulario.appendChild(text);
     }
 }
 
-verificarUsuario("guille6");
+verificarUsuario("guille86");
 
