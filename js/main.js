@@ -11,13 +11,13 @@ idFormulario.addEventListener("submit",(e)=>{
     const email = document.getElementById("email").value;
     const password = document.getElementById("password").value;
 
+    if(verificarUsuario(user)) invalidarUsuario();
+    
+    if(verificarMail(email)) invalidarEmail();
 
-    if(verificarUsuario(user)){ //si el usuario ya esta registrado
-        invalidarUsuario(); //invalido el usuario y no se registra
-    }
-    else{
-        registrarUsuario(user,email,password); //si el usuario no esta registrado se registra
-    }
+    //si usuario y mail no estan registrados registro el usuario
+    if(!verificarUsuario(user) && !verificarMail(email)) registrarUsuario(user,email,password);
+    
     
     //Limpiamos el formulario
     idFormulario.reset();    
@@ -66,4 +66,3 @@ function registrarUsuario(user,email,password){
     localStorage.setItem("Usuario",JSON.stringify(users));
 }
 
-invalidarEmail();
