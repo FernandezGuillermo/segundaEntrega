@@ -11,13 +11,14 @@ idFormulario.addEventListener("submit",(e)=>{
     const email = document.getElementById("email").value;
     const password = document.getElementById("password").value;
 
+    //verifico el usuario si esta ingresado cambio el estilo de bootstrap
     if(verificarUsuario(user)) invalidarUsuario();
     
+    //verifico el email si esta ingresado cambio el estilo de bootstrap
     if(verificarMail(email)) invalidarEmail();
 
     //si usuario y mail no estan registrados registro el usuario
     if(!verificarUsuario(user) && !verificarMail(email)) registrarUsuario(user,email,password);
-    
     
     //Limpiamos el formulario
     idFormulario.reset();    
@@ -44,6 +45,9 @@ function invalidarUsuario(){
     const userFormulario = document.getElementById("user");
     userFormulario.className = "form-control is-invalid";
     userFormulario.id = "floatingInputGroup2";
+    let mensajeUser = document.getElementById("mensajeUser");
+    mensajeUser.className = "invalid-feedback"
+    mensajeUser.innerText = "Este usuario ya esta registrado";
 }
 
 //funcion que me cambia el estilo del input del formulario con bootstrap
@@ -51,6 +55,9 @@ function invalidarEmail(){
     const emailFormulario = document.getElementById("email");
     emailFormulario.className = "form-control is-invalid";
     emailFormulario.id = "floatingInputGroup2";
+    let mensajeEmail = document.getElementById("mensajeEmail");
+    mensajeEmail.className = "invalid-feedback"
+    mensajeEmail.innerText = "Este mail ya ha sido registrado";
 }
 
 
