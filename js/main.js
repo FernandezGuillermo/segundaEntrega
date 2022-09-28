@@ -13,7 +13,7 @@ idFormulario.addEventListener("submit",(e)=>{
 
     //verifico el usuario si esta ingresado cambio el estilo de bootstrap
     if(verificarUsuario(user)) invalidarUsuario();
-    
+     
     //verifico el email si esta ingresado cambio el estilo de bootstrap
     if(verificarMail(email)) invalidarEmail();
 
@@ -47,7 +47,7 @@ function invalidarUsuario(){
     userFormulario.id = "floatingInputGroup2";
     let mensajeUser = document.getElementById("mensajeUser");
     mensajeUser.className = "invalid-feedback"
-    mensajeUser.innerText = "Este usuario ya esta registrado";
+    mensajeUser.innerText = "Este usuario ya esta registrado"; 
 }
 
 //funcion que me cambia el estilo del input del formulario con bootstrap
@@ -73,3 +73,7 @@ function registrarUsuario(user,email,password){
     localStorage.setItem("Usuario",JSON.stringify(users));
 }
 
+let btnLimpiarForm = document.getElementById ("btnLimpiarForm");
+btnLimpiarForm.onclick = () => {
+    /* userFormulario.className = "form-control is-valid"; */
+};
