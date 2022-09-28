@@ -13,7 +13,7 @@ idFormulario.addEventListener("submit",(e)=>{
 
 
     if(verificarUsuario(user)){ //si el usuario ya esta registrado
-        invalidarFormulario(); //invalido el usuario y no se registra
+        invalidarUsuario(); //invalido el usuario y no se registra
     }
     else{
         registrarUsuario(user,email,password); //si el usuario no esta registrado se registra
@@ -25,18 +25,36 @@ idFormulario.addEventListener("submit",(e)=>{
 
 const userFormulario = document.getElementById("user");
 
+//funcion que verifica el usuario
 function verificarUsuario(userName){
     let user = localStorage.getItem("Usuario",JSON.stringify(users));
     user = users.find(user => user.userName === userName);
     if(user != undefined) return true;
 }
 
-function invalidarFormulario(){ //funcion que me invalida el formulario cambiando su estilo con bootstrap
+//funcion que verifica el mail
+function verificarMail(userEmail){
+    let email = localStorage.getItem("Usuario",JSON.stringify(users));
+    email = users.find(user => user.email === userEmail);
+    if(email != undefined) return true;
+}
+
+//funcion que me cambia el estilo del input del formulario con bootstrap
+function invalidarUsuario(){ 
     const userFormulario = document.getElementById("user");
     userFormulario.className = "form-control is-invalid";
     userFormulario.id = "floatingInputGroup2";
 }
 
+//funcion que me cambia el estilo del input del formulario con bootstrap
+function invalidarEmail(){ 
+    const emailFormulario = document.getElementById("email");
+    emailFormulario.className = "form-control is-invalid";
+    emailFormulario.id = "floatingInputGroup2";
+}
+
+
+//funcion que registra el usuario
 function registrarUsuario(user,email,password){
     //Creamos el objeto usuario
     const usuario = new User(user,email,password);
@@ -47,3 +65,5 @@ function registrarUsuario(user,email,password){
     //Guardo los datos en el storage
     localStorage.setItem("Usuario",JSON.stringify(users));
 }
+
+invalidarEmail();
