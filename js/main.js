@@ -48,6 +48,7 @@ function invalidarUsuario(){
     let mensajeUser = document.getElementById("mensajeUser");
     mensajeUser.className = "invalid-feedback"
     mensajeUser.innerText = "Este usuario ya esta registrado"; 
+    userFormulario.id = "user";
 }
 
 //funcion que me cambia el estilo del input del formulario con bootstrap
@@ -58,6 +59,7 @@ function invalidarEmail(){
     let mensajeEmail = document.getElementById("mensajeEmail");
     mensajeEmail.className = "invalid-feedback"
     mensajeEmail.innerText = "Este mail ya ha sido registrado";
+    emailFormulario.id = "email";
 }
 
 
@@ -71,9 +73,14 @@ function registrarUsuario(user,email,password){
 
     //Guardo los datos en el storage
     localStorage.setItem("Usuario",JSON.stringify(users));
+
+    
 }
 
 let btnLimpiarForm = document.getElementById ("btnLimpiarForm");
 btnLimpiarForm.onclick = () => {
-    /* userFormulario.className = "form-control is-valid"; */
+    const userFormulario = document.getElementById("user");
+    userFormulario.className = "form-control";    
+    const emailFormulario = document.getElementById("email");
+    emailFormulario.className = "form-control";
 };
