@@ -9,7 +9,7 @@ class User{
 }
 
 //array que guarda los usuarios
-const users = [];
+const users = JSON.parse(localStorage.getItem('usuario')) || [];
 
 //usuarios
 const guillermo = new User("guille86","fernandez_guillermo@outlook.com","167524893");
